@@ -91,13 +91,14 @@ def main():
             pe = float(s.get_price_earnings_ratio())   
         
         except :
+            saham = investing_read(stock_ticker)
             try:
-                saham = investing_read(stock_ticker)
-                pps,book_prc,divy,pe = saham.read_text()
-            except Exception as e:
-                print(e)
-                sys.exit(0)
-                
+                saham.get_text()
+            except:
+                print("url not found, provide investing.com ratios url \n")
+                saham.manual_text()
+            pps,book_prc,divy,pe = saham.read_text()
+               
         x_new = np.array([[pps,book_prc,divy,pe]])
         
     elif trigger == 'T':
